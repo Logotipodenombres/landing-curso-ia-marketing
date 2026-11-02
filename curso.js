@@ -126,7 +126,7 @@ window.CURSO = (() => {
       cta:"Solicitar capacitación para mi empresa",message:"Hola, vi la página de capacitaciones de JC Creativo y me interesa conocer las opciones de cursos privados para mi negocio, empresa u organización."
     },
     contact:{
-      whatsapp:"",message:"Hola, quiero inscribirme con JC Creativo. Quisiera confirmar disponibilidad y formas de pago.",
+      whatsapp:"527531597808",message:"Hola, quiero inscribirme con JC Creativo. Quisiera confirmar disponibilidad y formas de pago.",
       interests:[...basic.shifts.map(turno => basic.name + " · " + basic.date + " · " + turno), courseName + " · 26 al 28 de noviembre · " + logistics.time],
       privacy:"JC Creativo utilizará tu nombre, tu número de WhatsApp y el correo opcional para responder y dar seguimiento a tu solicitud. Si envías el mensaje por WhatsApp, compartirás los datos incluidos con JC Creativo a través de esa plataforma. Puedes solicitar acceso, corrección o eliminación de tus datos, o retirar tu autorización, por el mismo canal de contacto.",
       consent:"Autorizo a JC Creativo a utilizar mis datos para atender esta solicitud y darle seguimiento conforme al aviso de privacidad."
