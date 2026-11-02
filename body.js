@@ -282,6 +282,7 @@
       const body=message.join("\n");
       track("submit_registration","curso");
       if(num) {
+        if (typeof window.fbq === "function") window.fbq("track", "Lead");
         track("click_whatsapp","curso");
         window.location.assign("https://wa.me/"+num+"?text="+encodeURIComponent(body));
         return;
