@@ -20,7 +20,7 @@ window.CURSO = (() => {
   }));
   const basic = {name:"Inteligencia artificial básica", date:"Sábado 21 de noviembre de 2026", shifts:["9:00 a. m. a 1:00 p. m.","4:00 p. m. a 8:00 p. m."]};
   const pricing = {
-    regular:990, early:599, programSize:3, deadlines:{basico:"2026-11-15T00:00:00-06:00", programa:"2026-11-15T00:00:00-06:00"}, currency:"MXN", payments:[],
+    regular:990, early:599, programSize:3, deadlines:{basico:"2026-11-16T00:00:00-06:00", programa:"2026-11-16T00:00:00-06:00"}, currency:"MXN", payments:[],
     cta:"Consultar inscripciones y precios", earlyCta:"Asegurar mi lugar con precio de preventa",
     text:"Los precios son por persona. Elige el taller de IA básica del sábado 21 o el programa completo del 26 al 28 de noviembre.",
     conditions:"Consulta disponibilidad y condiciones con JC Creativo antes de realizar un pago."
@@ -29,8 +29,8 @@ window.CURSO = (() => {
     basic,
     hero:{
       courseName, promotionalTitle:"De la idea a la acción en 3 días",
-      title:"Diciembre está por llegar. ¿Tu negocio está listo para vender?",
-      subtitle:"Prepárate para la temporada navideña. Aprende a utilizar inteligencia artificial, crear videos atractivos y promocionar tus productos o servicios con herramientas digitales.",
+      title:"Aprende IA y crea contenido para tu próximo proyecto",
+      subtitle:"Dos capacitaciones presenciales para aplicar herramientas digitales en tu negocio, trabajo o proyectos personales.",
       cta:"Quiero prepararme para diciembre", secondaryCta:"Aprender IA, video y marketing",
       photo:photos[6].src, photoMobile:photos[6].thumb, photoAlt:photos[6].alt, steps:["Crear","Editar","Promocionar"]
     },
@@ -99,19 +99,13 @@ window.CURSO = (() => {
     pricing,
     includes:["Acceso a los tres días de capacitación","Actividades prácticas","Formación en IA, edición de video y marketing","Reconocimiento de participación sujeto a requisitos"],
     faq:[
-      {q:"¿Necesito conocimientos previos?",a:"Puedes comenzar sin experiencia en IA, edición de video o marketing. Los primeros ejercicios te guiarán desde la idea inicial."},
-      {q:"¿El curso es adecuado para principiantes?",a:"Sí. El nivel es introductorio y trabajarás paso a paso en un mismo ejercicio durante las tres etapas."},
-      {q:"¿Debo llevar mi computadora?",a:"El equipo organizador confirmará el equipo necesario. Al solicitar información, indica si planeas trabajar desde una laptop o un teléfono."},
-      {q:"¿Puedo utilizar versiones gratuitas de ChatGPT y otras herramientas?",a:"Sí. El temario incluye cómo aprovechar las versiones gratuitas para realizar los ejercicios."},
-      {q:"¿Dónde se impartirá?",a:logistics.mode + " en " + logistics.city + ". " + logistics.venue + "."},
-      {q:"¿Cuáles serán los horarios?",a:basic.date + ": elige de " + basic.shifts.join(" o de ") + ". Programa de tres días: " + logistics.time + "."},
-      {q:"¿Cuáles son las fechas?",a:basic.name + ": " + basic.date + ". Programa completo: " + logistics.dates + "."},
-      {q:"¿Se entregará reconocimiento?",a:"Sí. JC Creativo lo entregará a quienes cumplan las condiciones establecidas de participación."},
-      {q:"¿Cómo puedo apartar mi lugar?",a:"Prepara tu solicitud con el formulario y comunícate con JC Creativo. El equipo te indicará los pasos y confirmará tu lugar expresamente."},
-      {q:"¿Qué formas de pago aceptan?",a:pricing.payments.length ? pricing.payments.join(", ") + "." : "Las formas de pago están por confirmar. Solicita los detalles directamente antes de realizar un pago."},
-      {q:"¿Puedo inscribir a varias personas?",a:"Indica cuántas personas desean asistir al contactar al equipo. La organización te informará de la disponibilidad y el proceso para tu grupo."},
-      {q:"¿Hasta cuándo puedo pagar el precio de preventa?",a:"El pronto pago de ambas opciones está disponible hasta el 14 de noviembre de 2026 inclusive. Liquida el curso elegido antes de la medianoche, hora de Ciudad de México. Desde el 15 se aplica el precio normal."}
-    ],
+      {q:"¿Necesito experiencia?",a:"Ambas opciones comienzan desde lo básico."},
+      {q:"¿Puedo utilizar herramientas gratuitas?",a:"Sí. Practicarás con versiones gratuitas de ChatGPT y otras herramientas."},
+      {q:"¿Debo llevar laptop?",a:"Consulta con JC Creativo el equipo necesario para tu modalidad antes de asistir."},
+      {q:"¿Dónde se impartirá?",a:"JC Creativo organiza e imparte los cursos en las instalaciones del CECATI 70, en Lázaro Cárdenas, Michoacán."},
+      {q:"¿Qué incluye el precio?",a:"IA básica incluye un taller de cuatro horas. El intensivo incluye las tres sesiones de IA, edición y marketing, con doce horas de práctica en total."},
+      {q:"¿Recibiré reconocimiento?",a:"Sí. JC Creativo emite el reconocimiento del curso elegido al concluir y cumplir los requisitos de participación."},
+      {q:"¿Cómo aseguro mi lugar?",a:"Envía tu solicitud por WhatsApp. JC Creativo te indicará los pasos de pago y confirmará tu lugar directamente."}    ],
     closing:{title:"La tecnología avanza. Tú también puedes hacerlo.",text:"Trae una idea de tu negocio o trabajo y aprende, paso a paso, a convertirla en contenido que puedas compartir y promocionar.",photo:photos[1].src,cta:"Quiero inscribirme"},
     corporate:{
       title:"¿Necesitas capacitar a tu equipo o empresa?",subtitle:"En JC Creativo desarrollamos capacitaciones privadas adaptadas a las necesidades de negocios, empresas, instituciones y organizaciones.",
@@ -136,7 +130,7 @@ window.CURSO = (() => {
       benefitsTitle:"En tres días conocerás herramientas que puedes comenzar a aplicar en tus proyectos",audienceTitle:"Este curso puede ser para ti",
       audienceText:"No necesitas ser experto en tecnología para comenzar. Aprenderás mediante explicaciones claras y ejercicios prácticos.",audienceCta:"Quiero aprender estas habilidades",
       programTitle:"Tres días. Tres habilidades. Una sola estrategia.",programCta:"Quiero vivir esta experiencia",galleryCta:"Quiero formar parte del próximo grupo",
-      pricingTitle:"Elige tu curso y consulta su precio",faqTitle:"Preguntas frecuentes",formTitle:"Solicita tu inscripción",includesTitle:"Qué incluye tu inscripción",
+      pricingTitle:"Elige tu curso",faqTitle:"Preguntas frecuentes",formTitle:"Solicita tu inscripción",includesTitle:"Qué incluye tu inscripción",
       program:"Programa",gallery:"Galería",instructor:"Instructor",faq:"Preguntas frecuentes",form:"Solicitar mi inscripción",privacy:"Aviso de privacidad",recognition:"Reconocimiento de participación"
     }
   };

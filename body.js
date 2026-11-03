@@ -58,6 +58,12 @@
       <ol class="jc-process" aria-label="Cómo se conectan las etapas">${list(c.process)}</ol>
       <div class="jc-result"><p>${esc(c.result)}</p>${cta(c.labels.programCta)}</div>`);
   }
+  function courseDetails(c) {
+    return section("programa","jc-paper",`${kicker("Temario y ejemplos")}<h2>Explora tu capacitación</h2>
+      <nav class="course-switch" aria-label="Seleccionar temario"><a href="?curso=ia-basica#programa" data-detail="basico">IA básica</a><a href="?curso=intensivo#programa" data-detail="programa">Intensivo de 3 días</a></nav>
+      <article data-panel="basico"><h3>IA básica · De una instrucción a un anuncio</h3><p>Practica con ChatGPT cómo pedir una imagen, ajustar el tono de una publicación y escribir un guion breve.</p><details><summary>Ver ejercicio y temario</summary><p>Prueba esta instrucción: «Escribe tres publicaciones para presentar mi menú. Usa un tono cercano y termina con una invitación a pedir por WhatsApp». Compara las propuestas, modifica una y adapta la imagen a tu negocio.</p></details><div class="samples">${["Transporte de carga","Anuncio de pinturas","Promoción de alimentos","Servicios de enfermería"].map((alt,i)=>`<img loading="lazy" src="assets/ia-ejemplo-${i}.jpg" alt="${alt}">`).join("")}</div><small>Ejemplos demostrativos de anuncios y publicaciones</small><p><a class="jc-cta" href="#inscripcion" data-plan="basico">Quiero aprender IA ↗</a></p></article>
+      <article data-panel="programa" hidden><h3>Intensivo · De la idea al video y su promoción</h3><div class="lab-cards">${c.days.map((day,i)=>`<details class="lab-card"><summary>Día ${i+1} · ${esc(day.short)}</summary><p>${esc(day.activity)}</p></details>`).join("")}</div><video controls playsinline preload="none" poster="assets/demo-poster.jpg" aria-label="Ejemplo de edición de un anuncio" style="width:min(100%,440px);max-height:320px"><source src="assets/demo.mp4" type="video/mp4"></video><p>Ejemplo ilustrativo: una idea de promoción se convierte en un clip y termina con una invitación a pedir el menú.</p><a class="jc-cta" href="#inscripcion" data-plan="programa">Quiero el programa completo ↗</a></article>`);
+  }
   function demonstration(c) {
     const stages = [
       ["01", "Inteligencia artificial", "Encuentra tu gancho", "Convierte un producto y un público en una idea para tu anuncio.", "M6 4h36v24H22l-9 8v-8H6z M13 12h21m-21 7h14"],
@@ -114,11 +120,11 @@
       const q = quote(c,plan,now);
       const percent = (100*q.saving/q.regular).toFixed(1);
       const savings = plan === "programa" ? `3 cursos por ${pesos(q.total)}. ¡Ahorras ${pesos(q.saving)}!` : `Ahorras ${pesos(q.saving)} MXN`;
-      return `<article class="jc-offer"><h3>${esc(name)}</h3><p class="jc-offer-date"><b>${esc(plan === "basico" ? c.basic.date : c.logistics.dates)}</b><br>${esc(plan === "basico" ? "4 horas · Elige de "+c.basic.shifts.join(" o de ") : c.logistics.time)}</p><small>${q.promo ? "PRONTO PAGO" : "PRECIO NORMAL"}</small><strong>${pesos(q.total)} MXN</strong>
+      return `<article class="jc-offer"><h3>${esc(name)}</h3><p class="jc-offer-date"><b>${esc(plan === "basico" ? c.basic.date : c.logistics.dates)}</b><br>${esc(plan === "basico" ? "4 horas · Elige de "+c.basic.shifts.join(" o de ") : "12 horas · "+c.logistics.time)}</p><small>${q.promo ? "PRONTO PAGO" : "PRECIO NORMAL"}</small><strong>${pesos(q.total)} MXN</strong>
       ${q.promo ? `<p>Precio normal: <s>${pesos(q.regular)} MXN</s></p><p><b>${savings}</b> · ≈ ${percent}% de descuento</p>` : ""}
-      ${q.units>1 ? `<p>${pesos(q.unit)} MXN por cada curso.</p>` : ""}
-      ${q.promo ? `<p class="jc-payment-term">Liquida ${pesos(q.total)} MXN a más tardar el 14 de noviembre de 2026.</p>` : ""}
-      <a class="jc-cta" data-plan="${plan}" href="#inscripcion">${q.promo ? "Inscribirme con descuento" : "Inscribirme"} · ${pesos(q.total)} MXN ↗</a></article>`;
+      <p>${plan==="basico"?"ChatGPT, prompts, imágenes, publicaciones y guiones para tu trabajo.":"Crea con IA, edita un video y prepara su promoción."}</p>
+      ${q.promo ? `<p class="jc-payment-term">Liquida ${pesos(q.total)} MXN a más tardar el 15 de noviembre de 2026.</p>` : ""}
+      <a class="jc-cta" data-plan="${plan}" href="#inscripcion">${plan==="basico"?"Quiero aprender IA":"Quiero el programa completo"} ↗</a><a class="detail-link" data-detail="${plan}" href="?curso=${plan==="basico"?"ia-basica":"intensivo"}#programa">Ver temario y ejemplos ↓</a></article>`;
     }).join("");
     return `${kicker("Inscripción al curso")}<h2>${esc(c.labels.pricingTitle)}</h2><p>${esc(c.pricing.text)}</p>
       
@@ -133,11 +139,12 @@
   function registration(c) {
     const active=Boolean(businessNumber(c.contact.whatsapp));
     return section("inscripcion","jc-dark",`<div class="jc-split jc-registration"><div>${kicker("Contacto e inscripciones")}<h2>${esc(c.labels.formTitle)}</h2><p class="jc-lead">Cuéntanos qué te interesa. JC Creativo te orientará sobre disponibilidad y el proceso para confirmar tu lugar.</p>
-      <ul class="jc-registration-facts">${list([c.logistics.dateStatus+" · "+c.logistics.dates,c.logistics.city,c.logistics.time,c.logistics.venue])}</ul></div>
+      <ul class="jc-registration-facts">${list(["Organiza e imparte JC Creativo","Sede: "+c.logistics.venue+", "+c.logistics.city])}</ul></div>
       <form id="jc-form" class="jc-form"><label>Nombre completo<input name="nombre" autocomplete="name" required maxlength="100" pattern=".*\\S.*"></label>
       <label>WhatsApp con lada<input name="telefono" type="tel" autocomplete="tel" required maxlength="24" placeholder="+52 000 000 0000"></label>
       <label>Correo electrónico (opcional)<input name="correo" type="email" autocomplete="email" maxlength="254"></label>
-      <label>Curso y horario<select name="interes" required><option value="">Selecciona una opción</option>${c.contact.interests.map(i=>`<option>${esc(i)}</option>`).join("")}</select></label>
+      <label>Curso<select name="interes" required><option value="">Elige tu curso</option><option value="basico">IA básica</option><option value="programa">Programa completo</option></select></label>
+      <label id="turno" hidden>Horario del taller<select name="turno"><option value="">Elige tu horario</option>${c.basic.shifts.map(t=>`<option>${esc(t)}</option>`).join("")}</select></label>
       <output id="jc-price-summary" aria-live="polite"></output><div class="jc-trap" aria-hidden="true"><label>Sitio personal<input name="web" tabindex="-1" autocomplete="off"></label></div>
       <details class="jc-privacy" id="privacidad"><summary>Aviso de privacidad</summary><p>${esc(c.contact.privacy)}</p></details>
       <label class="jc-check"><input type="checkbox" name="consent" required><span>${esc(c.contact.consent)}</span></label>
@@ -156,9 +163,7 @@
     const action=num ? `<a class="jc-cta" data-corporate href="https://wa.me/${num}?text=${encodeURIComponent(data.message)}" target="_blank" rel="noopener noreferrer">${esc(data.cta)} ↗</a>` :
       `<button type="button" class="jc-cta" data-corporate aria-controls="jc-corp-draft" aria-expanded="false">${esc(data.cta)} ↗</button>
       <div id="jc-corp-draft" hidden><p>WhatsApp empresarial pendiente de publicación. Puedes copiar el mensaje y contactar a JC Creativo en su sitio oficial.</p><label>Mensaje para cotización<textarea rows="4" readonly>${esc(data.message)}</textarea></label><button class="jc-copy" type="button">Copiar mensaje</button> ${safeUrl(c.socials.website) ? `<a href="${safeUrl(c.socials.website)}" rel="noopener noreferrer" target="_blank">Sitio oficial ↗</a>`:""}<p role="status"></p></div>`;
-    return section("empresas","jc-corporate",`<div class="jc-split"><div>${kicker("JC Creativo / Formación a la medida")}<h2>${esc(data.title)}</h2><p class="jc-lead">${esc(data.subtitle)}</p></div>${photo(data.photo,"Experiencia de capacitación grupal de JC Creativo","jc-corp-photo")}</div>
-      <div class="jc-modalities">${data.modalities.map((m,i)=>`<article><small>0${i+1}</small><h3>${esc(m.title)}</h3><p>${esc(m.text)}</p></article>`).join("")}</div>
-      <ul class="jc-corp-benefits">${list(data.benefits)}</ul><div class="jc-corp-action">${action}</div>`);
+    return section("empresas","jc-corporate",`<h2>Capacitaciones privadas</h2><p>Solicita una propuesta para tu empresa, negocio o institución.</p>${action}`);
   }
   function footer(c) {
     const num=businessNumber(c.contact.whatsapp);
@@ -168,7 +173,7 @@
   }
   window.renderCourseBody = () => {
     const c=window.CURSO;
-    return [section("precio","jc-white",offer(c)),opportunity(c),benefits(c),audience(c),program(c),demonstration(c),gallery(c),evidence(c),instructor(c),certification(c),recognition(c),inclusions(c),faq(c),registration(c),closing(c),corporate(c),footer(c)].join("\n");
+    return [section("precio","jc-white",offer(c)),courseDetails(c),instructor(c),certification(c),gallery(c),recognition(c),registration(c),faq(c),corporate(c),footer(c)].join("\n");
   };
 
   function track(event, channel) {
@@ -222,12 +227,16 @@
     const area=draft.querySelector("textarea");
     const num=businessNumber(c.contact.whatsapp);
     const select = form.elements.interes;
-    const selectedPlan = () => select.value === c.contact.interests.at(-1) ? "programa" : "basico";
+    const selectedPlan = () => select.value || "basico";
     const summary = root.querySelector("#jc-price-summary");
     const submit = form.querySelector('button[type="submit"]');
     function refreshSummary() {
       const q = quote(c,selectedPlan());
-      summary.textContent = select.value ? select.value + " · Total por persona: " + pesos(q.total) + " MXN" : "";
+      const basic = select.value === "basico";
+      root.querySelector("#turno").hidden = !basic;
+      form.elements.turno.required = basic;
+      const choice = basic ? c.basic.name+" · "+c.basic.date+" · "+(form.elements.turno.value || "Elige tu horario") : "Programa completo · "+c.logistics.dates+" · "+c.logistics.time;
+      summary.textContent = select.value ? choice + " · Total por persona: " + pesos(q.total) + " MXN" : "";
       submit.textContent = select.value ? "Solicitar mi inscripción por " + pesos(q.total) + " MXN ↗" : "Solicitar mi inscripción ↗";
     }
     let displayedPromo;
@@ -249,12 +258,30 @@
     schedulePrices();
     window.addEventListener("pageshow",refreshPrices);
     document.addEventListener("visibilitychange",()=>{if(!document.hidden) refreshPrices()});
-    select.addEventListener("change",refreshSummary);
+    function choose(plan) {
+      select.value=plan;
+      root.querySelectorAll("[data-panel]").forEach(panel=>panel.hidden=panel.dataset.panel!==plan);
+      root.querySelectorAll(".course-switch a").forEach(link=>link.setAttribute("aria-current",String(link.dataset.detail===plan)));
+      refreshSummary();
+    }
+    function fromURL(){
+      const route=new URLSearchParams(location.search).get("curso");
+      choose(route==="intensivo"?"programa":"basico");
+    }
+    fromURL();
+    window.addEventListener("popstate",fromURL);
+    form.elements.turno.addEventListener("change",refreshSummary);
+    select.addEventListener("change",()=>choose(select.value));
+    root.addEventListener("click",event=>{
+      const link=event.target.closest("[data-detail]");
+      if(!link || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      event.preventDefault();history.pushState(null,"",link.href);choose(link.dataset.detail);
+      root.querySelector("#programa").scrollIntoView();
+    });
     root.addEventListener("click",event=>{
       const link = event.target.closest("[data-plan]");
       if (!link) return;
-      if (link.dataset.plan === "programa") select.value = c.contact.interests.at(-1);
-      else if (selectedPlan() === "programa") select.value = "";
+      choose(link.dataset.plan);
       draft.hidden = true;
       status.textContent = "";
       refreshSummary();
@@ -276,8 +303,8 @@
         return;
       }
       if (!form.reportValidity()) return;
-      const message=[c.contact.message,"Nombre: "+form.elements.nombre.value.trim(),"WhatsApp: "+telephone,"Curso y horario: "+form.elements.interes.value];
-      message.push("Total por persona: "+pesos(quote(c,selectedPlan()).total)+" MXN");
+      const message=[c.contact.message,"Nombre: "+form.elements.nombre.value.trim(),"WhatsApp: "+telephone,"Inscripción: "+summary.textContent];
+
       if(form.elements.correo.value) message.push("Correo: "+form.elements.correo.value.trim());
       const body=message.join("\n");
       track("submit_registration","curso");

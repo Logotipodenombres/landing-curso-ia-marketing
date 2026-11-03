@@ -13,3 +13,10 @@ if(form)new IntersectionObserver(([entry])=>fixed.hidden=entry.isIntersecting).o
 const links=[...document.querySelectorAll(".wide-nav a")];
 const watch=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){for(const a of links){if(a.hash==="#"+entry.target.id)a.setAttribute("aria-current","location");else a.removeAttribute("aria-current")}}},{rootMargin:"-8% 0px -67% 0px"});
 for(const a of links){const s=document.querySelector(a.hash);if(s)watch.observe(s)}
+const previousSections = {beneficios:"programa", publico:"precio", oportunidad:"precio", demostracion:"programa", evidencias:"galeria", incluye:"precio", cierre:"inscripcion"};
+function resolvePreviousSection() {
+  const target = previousSections[location.hash.slice(1)];
+  if (target) document.getElementById(target)?.scrollIntoView();
+}
+resolvePreviousSection();
+window.addEventListener("hashchange", resolvePreviousSection);

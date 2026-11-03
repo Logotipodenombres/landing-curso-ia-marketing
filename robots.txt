@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://jccreativo.com.mx/sitemap.xml
+Sitemap: https://logotipodenombres.github.io/landing-curso-ia-marketing/sitemap.xml
