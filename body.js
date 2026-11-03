@@ -168,7 +168,9 @@
     const action=num ? `<a class="jc-cta" data-corporate href="https://wa.me/${num}?text=${encodeURIComponent(data.message)}" target="_blank" rel="noopener noreferrer">${esc(data.cta)} ↗</a>` :
       `<button type="button" class="jc-cta" data-corporate aria-controls="jc-corp-draft" aria-expanded="false">${esc(data.cta)} ↗</button>
       <div id="jc-corp-draft" hidden><p>WhatsApp empresarial pendiente de publicación. Puedes copiar el mensaje y contactar a JC Creativo en su sitio oficial.</p><label>Mensaje para cotización<textarea rows="4" readonly>${esc(data.message)}</textarea></label><button class="jc-copy" type="button">Copiar mensaje</button> ${safeUrl(c.socials.website) ? `<a href="${safeUrl(c.socials.website)}" rel="noopener noreferrer" target="_blank">Sitio oficial ↗</a>`:""}<p role="status"></p></div>`;
-    return section("empresas","jc-corporate",`<h2>Capacitaciones privadas</h2><p>Solicita una propuesta para tu empresa, negocio o institución.</p>${action}`);
+    return section("empresas","jc-corporate",`<div class="jc-split"><div>${kicker("JC Creativo / Formación a la medida")}<h2>${esc(data.title)}</h2><p class="jc-lead">${esc(data.subtitle)}</p></div>${photo(data.photo,"Experiencia de capacitación grupal de JC Creativo","jc-corp-photo")}</div>
+      <div class="jc-modalities">${data.modalities.map((m,i)=>`<article><small>0${i+1}</small><h3>${esc(m.title)}</h3><p>${esc(m.text)}</p></article>`).join("")}</div>
+      <ul class="jc-corp-benefits">${list(data.benefits)}</ul><div class="jc-corp-action">${action}</div>`);
   }
   function footer(c) {
     const num=businessNumber(c.contact.whatsapp);
